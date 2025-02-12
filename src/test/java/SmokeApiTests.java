@@ -2,6 +2,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static constants.CommonConstants.BASE_URL;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
@@ -18,8 +19,6 @@ public class SmokeApiTests {
                   "userStatus": 0
                 }""";
 
-    String baseUri = "https://petstore.swagger.io/v2/";
-
     @Test
     void simpleTest() {
         /// AAA -> Arrange - Act - Assert
@@ -27,7 +26,7 @@ public class SmokeApiTests {
         Response response = given()
                     .header("accept", "application/json")
                     .header("Content-Type", "application/json")
-                    .baseUri(baseUri)
+                    .baseUri(BASE_URL)
                 .when()
                     .body(body)
                     .post("user")
@@ -42,7 +41,7 @@ public class SmokeApiTests {
     void simpleTestWithBody() {
 
         given()
-                    .baseUri(baseUri)
+                    .baseUri(BASE_URL)
                     .header("accept", "application/json")
                     .header("Content-Type", "application/json")
                     .body(body)
